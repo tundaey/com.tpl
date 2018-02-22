@@ -1,7 +1,7 @@
 import { Effect, Actions } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
@@ -11,7 +11,6 @@ import {
   FeedAddSuccess, FeedAddComment, FeedAddCommentFail, FeedAddCommentSuccess, FeedRemove, FeedRemoveFail,
   FeedRemoveSuccess
 } from './feed.actions';
-import { IFeed, IFeedComment } from './feed.reducer';
 
 @Injectable()
 export class FeedEffects {
@@ -21,9 +20,11 @@ export class FeedEffects {
     .ofType(FEED_ADD)
     .switchMap((action: FeedAdd) => {
 
-      return this.http.post<IFeed>('/api/feed', action.payload)
+      return this.http.post('/api/feed', action.payload)
+        .map((response: Response) => response.json())
         .catch((error) => Observable.of(new FeedAddFail(error)))
-        .map((response: IFeed) => new FeedAddSuccess(response));
+        .map((response) => new FeedAddSuccess(response));
+
     });
 
   @Effect()
@@ -31,9 +32,11 @@ export class FeedEffects {
     .ofType(FEED_ADD_COMMENT)
     .switchMap((action: FeedAddComment) => {
 
-      return this.http.post<IFeedComment>(`/api/feed/${action.payload.id}/comment`, action.payload.comment)
+      return this.http.post('/api/feed/' + action.payload.id + '/comment', action.payload.comment)
+        .map((response: Response) => response.json())
         .catch((error) => Observable.of(new FeedAddCommentFail(error)))
-        .map((response: IFeedComment) => new FeedAddCommentSuccess(response));
+        .map((response) => new FeedAddCommentSuccess(response));
+
     });
 
   @Effect()
@@ -41,11 +44,12 @@ export class FeedEffects {
     .ofType(FEED_REMOVE)
     .switchMap((action: FeedRemove) => {
 
-      return this.http.delete<IFeed>(`/api/feed/${action.payload}`)
+      return this.http.delete('/api/feed/' + action.payload)
+        .map((response: Response) => response.json())
         .catch((error) => Observable.of(new FeedRemoveFail(error)))
-        .map((response: IFeed) => new FeedRemoveSuccess(response));
+        .map((response) => new FeedRemoveSuccess(response));
 
     });
 
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(private actions$: Actions, private http: Http) {}
 }

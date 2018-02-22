@@ -1,0 +1,88 @@
+.header-sticky-container {
+  position: relative;
+  z-index: 100;
+}
+.base-header {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 64px;
+  z-index: 101;
+}
+.left-header {
+  display: -webkit-flex;
+  display: flex;
+  height: 100%;
+  align-items: stretch;
+}
+.for-header {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+}
+
+.single-tab {
+  font-size: 20px;
+  font-weight: 500;
+  align-self: center;
+  padding-left: 24px;
+}
+header {
+  align-items: stretch;
+  display: flex;
+  overflow: hidden;
+}
+.panel-right {
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+  align-items: center;
+  white-space: nowrap;
+}
+.panel-left {
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+  align-items: center;
+  white-space: nowrap;
+}
+
+
+
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  display: flex;
+  align-items: baseline;
+  padding: 8px 24px 0;
+  font-size: 20px;
+  justify-content: space-between;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  flex-grow: 1;
+  margin-left: 32px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.custom-tile {
+  left: calc(((25% - 0.75px) + 1px) * 2.5)
+}

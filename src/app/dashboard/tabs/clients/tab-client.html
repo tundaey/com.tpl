@@ -1,0 +1,189 @@
+<!-- <h2>{{title}}</h2>
+
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell"><pie-chart [data]="data1" [config]="config1" [elementId]="elementId1"></pie-chart></div>
+                <div class="divTableCell"><pie-chart [data]="data2" [config]="config2" [elementId]="elementId2"></pie-chart></div>
+            </div>
+        </div>
+</div> -->
+
+  <div class="header-tab-content">
+    <!-- <div><pie-chart [data]="data2" [config]="config2" [elementId]="piechart"></pie-chart></div> -->
+    <div id="chart" #chart style="width: 900px; height: 400px;"></div>
+    <!-- TABLE -->
+    <div class="example-container tab-container-no-map mat-elevation-z8">
+
+      <div class="example-header" style="padding-left: 5px; margin-left: 14em; width: 60%">
+        <!-- <button mat-button [matMenuTriggerFor]="menu2">Menu</button> -->
+        
+        <mat-form-field id="filterForm" style="margin-left: 5px; font-size: 12px" floatPlaceholder="never">
+          <mat-icon id="filter-icon" matPrefix>search</mat-icon>
+          <input id="filter" matInput #filter placeholder="Filter Data" class="filter">
+        </mat-form-field>   
+        
+        <button style="color: rgba(0, 0, 0, 0.54)" mat-icon-button (click)="openFilter($event, filter2)">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+
+        </div>
+
+        <!-- <div class="example-header" [ngClass]="{'border-class': showFilter}"> -->
+            <div [hidden]="!showFilter" class="example-header border-class">
+                <mat-menu id="traileOptions" class="trailer-options-menu" yPosition="below" #filter2="matMenu"
+                [overlapTrigger]="false">
+                <span *ngFor="let option of filterOptions; let i = index" [ngSwitch]="option">
+                    <button *ngSwitchCase="'Customer Name'" (click)="openFilterMenu(nameFilterTrigger,i)" mat-menu-item>{{option}}</button>
+                    <button *ngSwitchCase="'Email'" (click)="openFilterMenu(colFilterTrigger,i)" mat-menu-item>{{option}}</button>
+                    <button *ngSwitchCase="'Phone'" (click)="openFilterMenu(phoneFilterTrigger,i)" mat-menu-item>{{option}}</button>
+                    
+                </span>
+                </mat-menu>
+                <mat-menu (click)="$event.stopPropagation()" yPosition="below" [overlapTrigger]="false" #nameFilter="matMenu">
+                    <filter-menu
+                    [dataSource]= "dataSource"
+                    [filterType]="'Customer Name Filter'"
+                    [title]= "'Customer Name'"
+                    [trigger]= "nameFilterTrigger"
+                    [reducer]= "filterCustomerName.bind(this)"
+                    [addToFilterBar]="addCustomerToFilterBar.bind(this)"
+                    [selectedOptions] = "selectedOptions"></filter-menu>
+                      
+                </mat-menu>
+                <span  mat-button [mat-menu-trigger-for]="nameFilter" #nameFilterTrigger="matMenuTrigger"></span>
+
+                <mat-menu color="primary" yPosition="below" [overlapTrigger]="false" #colorFilter="matMenu">
+                  <filter-menu
+                          [dataSource]= "dataSource"
+                          [filterType]="'Email Filter'"
+                          [title]= "'Email'"
+                          [trigger]= "colFilterTrigger"
+                          [reducer]= "filterEmail.bind(this)"
+                          [addToFilterBar]="addEmailToFilterBar.bind(this)"
+                          [selectedOptions] = "selectedOptions"></filter-menu>
+                </mat-menu>
+                <span mat-button [mat-menu-trigger-for]="colorFilter" #colFilterTrigger="matMenuTrigger"></span>
+                
+                <mat-menu color="primary" yPosition="below" [overlapTrigger]="false" #phoneFilter="matMenu">
+                  <filter-menu
+                          [dataSource]= "dataSource"
+                          [filterType]="'Phone Filter'"
+                          [title]= "'Phone'"
+                          [trigger]= "phoneFilterTrigger"
+                          [reducer]= "filterPhone.bind(this)"
+                          [addToFilterBar]="addPhoneFilterBar.bind(this)"
+                          [selectedOptions] = "selectedOptions"></filter-menu>
+                </mat-menu>
+                <span mat-button [mat-menu-trigger-for]="phoneFilter" #phoneFilterTrigger="matMenuTrigger"></span>
+      
+                <mat-form-field floatPlaceholder="never" id="filter2Trigger">
+                    <mat-chip-list matPrefix #chipList>
+                        <mat-chip *ngFor="let opt of selectedOptions" [selectable]="selectable"
+                        [removable]="removable" (remove)="removeFromFilterBar(opt)">
+                          {{opt.value}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                      
+                    <input 
+                      mat-button [mat-menu-trigger-for]="filter2"
+                      #filter2Trigger="matMenuTrigger" matInput 
+                      placeholder="Filter" class="filter">
+                      <mat-icon style="cursor: pointer" (click)="closeFilterBar()" matSuffix>close</mat-icon>
+                </mat-form-field>
+                
+              </div>
+
+      <div class="spinner-container" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <img class="spinner" src="assets/animated-gif.gif" /> -->
+      </div>
+
+      <mat-table #table [dataSource]="dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+         <!-- Checkbox Column -->
+         <ng-container matColumnDef="checkbox">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox color="primary" class="checkbox" (change)="selectAllCheckBoxes($event)"></mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox color="primary" class="checkbox" [(ngModel)]="row.checked"></mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="enable">
+          <mat-header-cell *matHeaderCellDef> <div style="background-color: #9e9e9e" class="enable-circle"></div> </mat-header-cell>
+          <mat-cell [mat-menu-trigger-for]="enableButtonFilter" #enableButtonFilterTrigger="matMenuTrigger"
+            class="enable-circle-display" *matCellDef="let row">
+
+            <div class="enable-circle-cursor" (click)="openEnableTrigger(row)" [ngClass]="{'enable-circle': row.enable == true, 'enable-circle-pause': row.enable == false }"></div>
+
+            <!-- <div *ngIf="selectedRowIndex == row.id" [ngClass]="{'enable-icon-color': selectedRowIndex == row.id}">
+              <mat-icon matSuffix>arrow_drop_down</mat-icon>
+            </div> -->
+            <mat-menu yPosition="below" [overlapTrigger]="true" #enableButtonFilter="matMenu">
+                <button  mat-menu-item (click)="enableRow(row)">
+                  <div style="display: inline-block" class="enable-circle"></div>
+                  <p style="display: inline-block">Enable</p>
+                </button>
+                <button  mat-menu-item (click)="disableRow(row)">
+                  <div style="background-color: #9e9e9e; display: inline-block" class="enable-circle"></div>
+                  <p style="display: inline-block">Disable</p>
+                </button>
+            </mat-menu>
+            <span  mat-button ></span>
+          </mat-cell>
+        </ng-container>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="userId">
+          <mat-header-cell style="flex:2" *matHeaderCellDef> ID </mat-header-cell>
+          <mat-cell style="flex:2" (click)="viewData(row)" *matCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="userName">
+            <mat-header-cell style="flex:2" *matHeaderCellDef> Customer Name </mat-header-cell>
+            <mat-cell style="flex:2" (click)="viewData(row)" *matCellDef="let row"> {{row.customer_name}} </mat-cell>
+          </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="color">
+          <mat-header-cell style="flex:2" *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell style="flex:2" (click)="viewData(row)" *matCellDef="let row">{{row.email}}</mat-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="progress">
+          <mat-header-cell style="flex:2" *matHeaderCellDef> Phone </mat-header-cell>
+          <mat-cell style="flex:2" (click)="viewData(row)" *matCellDef="let row"> {{row.phone}} </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="date">
+          <mat-header-cell style="flex:2" *matHeaderCellDef> Date </mat-header-cell>
+          <mat-cell style="flex:2" *matCellDef="let row"> {{row.date | date: 'shortDate'}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row [ngClass]="{'highlight': selectedId == row.id}" 
+           *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <mat-paginator #paginator
+        [length]="pageLength"
+        [pageIndex]="0"
+        [pageSize]="5"
+        (page)="pageChanged($event)"
+        [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+    </div>
+    <!-- TABLE END -->
+  </div>
+
+

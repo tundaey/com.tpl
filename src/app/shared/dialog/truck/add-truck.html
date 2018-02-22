@@ -1,0 +1,85 @@
+<div mat-dialog-content id="clientDialog">
+    <mat-card class="example-card" (click)="$event.stopPropagation()">
+        <div class="card-header" style="color: white; background: #3f51b5">
+            <mat-card-title>Add New Truck</mat-card-title> 
+            <button (click)="closeForm()" class="tpl-close-menu-button" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button> 
+        </div>    
+          <mat-card-content (click)="$event.stopPropagation()">
+              
+            <div >                  
+                <mat-horizontal-stepper id="truck_stepper" [linear]="isLinear" #stepper>
+
+                    <mat-step [stepControl]="truckInfoForm">
+                        <form [formGroup]="truckInfoForm">
+                            <!-- <ng-template matStepLabel>1</ng-template> -->
+                            <div class="parent form-flex">
+                                <mat-form-field class="form-field" >
+                                    <input formControlName="unit_no" matInput placeholder="Unit #" class="filter">  
+                                </mat-form-field>
+                
+                                <mat-form-field class="form-field">
+                                    <input formControlName="year" type="text" matInput placeholder="Year" class="filter">
+                                </mat-form-field>
+                            </div>
+                            <div class="parent form-flex">
+                                <mat-form-field class="form-field" >
+                                    <input formControlName="make" matInput placeholder="Make" class="filter">  
+                                </mat-form-field>
+                
+                                <mat-form-field class="form-field">
+                                    <input formControlName="model" type="text" matInput placeholder="Model" class="filter">
+                                </mat-form-field>
+                            </div>
+                            
+                            <div style="margin-top: 10px">
+                                <button style="float: right;" mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+
+                    <mat-step [stepControl]="truckDetailsForm">
+                        <form [formGroup]="truckDetailsForm">
+                            <!-- <ng-template matStepLabel></ng-template> -->
+                            <div class="parent form-flex">  
+                                <mat-form-field class="form-field">
+                                    <input formControlName="vin" matInput placeholder="Vin #" class="filter">
+                                </mat-form-field>
+                                <mat-form-field class="form-field">
+                                    <input formControlName="miles" matInput placeholder="Miles on Oil" class="filter">
+                                </mat-form-field>                                                   
+                            </div>
+
+                            <div class="parent form-flex">  
+                                <mat-form-field class="form-field">
+                                    <input formControlName="gross_wgt" matInput placeholder="Gross Wgt" class="filter">
+                                </mat-form-field>
+                                <mat-form-field class="form-field">
+                                    <input formControlName="fed_inspection" matInput [matDatepicker]="fedInspection" 
+                                    placeholder="Federal Inspection">
+                                    <mat-datepicker-toggle matSuffix [for]="fedInspection"></mat-datepicker-toggle>
+                                    <mat-datepicker #fedInspection></mat-datepicker>
+                                </mat-form-field>                                                   
+                            </div>
+
+                            <div>
+                                <!-- <button mat-button matStepperPrevious>Back</button> -->
+                                <button style="float:right" mat-raised-button color="primary" (click)="submitForm(stepper)">
+                                    <mat-spinner *ngIf="isFetching"></mat-spinner>
+                                    Save
+                                </button>
+                            </div>
+                            
+                        </form>
+                     </mat-step>
+                    </mat-horizontal-stepper>                
+            </div>
+          </mat-card-content> 
+          <!-- <mat-card-actions (click)="$event.stopPropagation()" align="start">
+            <button (click)="submitForm()" style="cursor: pointer" mat-button color="primary">SAVE </button>
+            <button style="cursor: pointer" mat-button color="primary">CANCEL</button>
+          </mat-card-actions>                              -->
+      </mat-card>
+
+    </div>

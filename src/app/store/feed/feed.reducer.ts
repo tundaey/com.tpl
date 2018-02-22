@@ -24,7 +24,7 @@ export function feedReducer(state: IFeed[] = [], action: Actions): IFeed[] {
 
     case FEED_REMOVE_SUCCESS:
 
-      return state.filter((feedToRemove: IFeed) => action.payload.id !== feedToRemove.id);
+      return state.filter((feed: IFeed) => action.payload.id !== feed.id);
 
     case FEED_ADD_COMMENT_SUCCESS:
 

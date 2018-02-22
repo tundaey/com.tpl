@@ -1,0 +1,29 @@
+<mat-card class="example-card" (click)="$event.stopPropagation()">
+    <div class="card-header" style="color: white; background: #3f51b5">
+        <mat-card-title>{{title}}</mat-card-title> 
+        <button (click)="closeFilter()" class="tpl-close-menu-button" mat-icon-button>
+            <mat-icon>close</mat-icon>
+        </button> 
+    </div>    
+    <mat-card-content (click)="$event.stopPropagation()">
+        <mat-form-field (click)="$event.stopPropagation()">
+            <mat-select #selectedOption (click)="$event.stopPropagation()" [ngModel]="selectedColorOption">
+                <mat-option (click)="$event.stopPropagation()" *ngFor="let opt of colorOptions" [value]="opt.value">
+                {{ opt.viewValue }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field (click)="$event.stopPropagation()" floatPlaceholder="never">
+            <input #nameFilterInput (click)="$event.stopPropagation()" matInput placeholder="Value" class="filter">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions (click)="$event.stopPropagation()" align="start">
+        <button style="cursor: pointer" 
+            mat-button color="primary" 
+            (click)="applyFilter(nameFilterInput, selectedOption)">
+            APPLY
+        </button>
+    </mat-card-actions>                              
+</mat-card>
+

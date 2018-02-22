@@ -2,29 +2,44 @@ import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { feedReducer, IFeed } from './feed/feed.reducer';
-import { profileReducer, IProfile } from './profile/profile.reducer';
-import { IWeather, weatherReducer } from './weather/weather.reducer';
 import { environment } from '../../environments/environment';
 
-// all new reducers should be define here
+import { driverReducer, DriverState} from './reducers/driver.reducer'
+import { clientReducer, ClientState} from './reducers/client.reducer'
+import { truckReducer, TruckState} from './reducers/truck.reducer'
+import { trailerReducer, TrailerState} from './reducers/trailer.reducer'
+import { tabReducer, TabState} from './reducers/tab.reducer'
+import { mapReducer, MapState} from './reducers/map.reducer'
+
+// all new state should be define here
 export interface IAppState {
   feed: IFeed[];
-  profile: IProfile;
-  weather: IWeather;
+  drivers: DriverState;
+  clients: ClientState;
+  trucks: TruckState;
+  trailers: TrailerState;
+  tab: TabState;
+  map: MapState;
+
 }
 
 // all new reducers should be define here
-export const reducers: ActionReducerMap<IAppState> = {
+export const reducers: ActionReducerMap<IAppState>= {
   feed: feedReducer,
-  profile: profileReducer,
-  weather: weatherReducer
-};
+  drivers: driverReducer,
+  clients: clientReducer,
+  trucks: truckReducer,
+  trailers: trailerReducer,
+  tab: tabReducer,
+  map: mapReducer
+}
+
 
 // console.log all actions
 export function logger(reducer: ActionReducer<IAppState>): ActionReducer<any, any> {
   return function(state: IAppState, action: any): IAppState {
-    console.log('state', state);
-    console.log('action', action);
+    //console.log('state', state);
+    //console.log('action', action);
 
     return reducer(state, action);
   };

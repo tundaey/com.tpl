@@ -13,6 +13,5 @@ export class ProfileComponent {
 
   constructor(store: Store<IAppState>) {
 
-    this.profile$ = store.select('profile');
   }
 }

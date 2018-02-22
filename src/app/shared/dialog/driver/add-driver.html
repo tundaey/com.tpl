@@ -1,0 +1,130 @@
+<div mat-dialog-content id="driverDialog">
+    <mat-card class="example-card" (click)="$event.stopPropagation()">
+        <div class="card-header" style="color: white; background: #3f51b5">
+            <mat-card-title>Add New Driver</mat-card-title> 
+            <button (click)="closeForm()" class="tpl-close-menu-button" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button> 
+        </div>    
+          <mat-card-content (click)="$event.stopPropagation()">
+              
+            <div >                  
+                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+                    <mat-step [stepControl]="basicInfoForm">
+                        <form [formGroup]="basicInfoForm">
+                            <!-- <ng-template matStepLabel>1</ng-template> -->
+                            <div class="parent form-flex">
+                                <mat-form-field class="form-field" >
+                                    <input formControlName="last_name" matInput placeholder="Last Name" class="filter">
+                                    
+                                </mat-form-field>
+                
+                                <mat-form-field class="form-field">
+                                    <input formControlName="first_name" matInput placeholder="First Name" class="filter">
+                                </mat-form-field>
+                            </div>
+                            <mat-form-field class="form-field" style="width: 50%">
+                                    <input formControlName="dob" matInput [matDatepicker]="picker" placeholder="DOB">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <div style="margin-top: 10px">
+                                <button style="float: right;" mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+
+                    <mat-step [stepControl]="contactForm">
+                        <form [formGroup]="contactForm">
+                          <!-- <ng-template matStepLabel>2</ng-template> -->
+                          <div class="parent form-flex">
+                                <mat-form-field class="form-field" >
+                                    <input formControlName="mobile" matInput placeholder="Mobile" class="filter">      
+                                </mat-form-field>
+                    
+                                <mat-form-field class="form-field">
+                                    <input formControlName="land_line" matInput placeholder="Land Line" class="filter">
+                                </mat-form-field>
+
+                          </div>
+                          
+                          <div class="parent form-flex" style="width: 50%"> 
+                            <mat-form-field class="form-field">
+                                <input formControlName="email" type="email" matInput placeholder="Email" class="filter">
+                            </mat-form-field>
+                           
+                          </div>
+                          <div class="parent form-flex">     
+                                <mat-form-field class="form-field">
+                                    <input formControlName="address" type="email" matInput placeholder="Address" class="filter">
+                                    <!-- <input  class="filter" type="text" placeholder="Address" 
+                                        aria-label="Number" matInput [formControl]="myControl" 
+                                        [matAutocomplete]="auto">
+
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                        <mat-option (click)="addOption(option)" [value]="option.name"
+                                        *ngFor="let option of filteredOptions | async" [value]="option">
+                                            {{ option.name }}
+                                        </mat-option>
+                                    </mat-autocomplete> -->
+                                </mat-form-field>                           
+                          </div>
+                          <div>
+                            <!-- <button mat-button matStepperPrevious>Back</button> -->
+                            <button style="float:right" mat-button (click)="goToContactForm(stepper)">Next</button>
+                          </div>
+                        </form>
+                    </mat-step>
+                    
+                      <mat-step [stepControl]="licenseForm">
+                        <form [formGroup]="licenseForm">
+                            <!-- <ng-template matStepLabel></ng-template> -->
+                            <div class="parent form-flex">  
+                                <mat-form-field class="form-field">
+                                    <input formControlName="drv_license" matInput placeholder="Drv License" class="filter">
+                                </mat-form-field>
+                                <mat-form-field class="form-field">
+                                    <input formControlName="cdl_exp" matInput [matDatepicker]="cdlExpl" placeholder="CDL Exp">
+                                    <mat-datepicker-toggle matSuffix [for]="cdlExpl"></mat-datepicker-toggle>
+                                    <mat-datepicker #cdlExpl></mat-datepicker>
+                                </mat-form-field>                                                       
+                            </div>
+                            <div class="parent form-flex">
+                                <mat-form-field class="form-field">
+                                    <input formControlName="last_drug_test" matInput [matDatepicker]="lastDrug" placeholder="Last Drug Test">
+                                    <mat-datepicker-toggle matSuffix [for]="lastDrug"></mat-datepicker-toggle>
+                                    <mat-datepicker #lastDrug></mat-datepicker>
+                                </mat-form-field>
+
+                                <mat-form-field class="form-field">
+                                    <input formControlName="physical_exp" matInput [matDatepicker]="phyEsp" placeholder="Physical Exp">
+                                    <mat-datepicker-toggle matSuffix [for]="phyEsp"></mat-datepicker-toggle>
+                                    <mat-datepicker #phyEsp></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="parent form-flex">
+                                    <div class="form-field">
+                                        <mat-checkbox color="primary" formControlName="hazmat">Hazmat</mat-checkbox>
+                                    </div>
+                            </div>
+                            <div>
+                                <mat-error *ngIf="isError">{{error}}</mat-error>
+                                <button [disabled]="!licenseForm.valid" style="float:right" mat-raised-button color="primary"
+                                 (click)="submitForm(stepper)">
+                                    <mat-spinner *ngIf="isFetching"></mat-spinner>
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                     </mat-step>
+                    </mat-horizontal-stepper>                
+            </div>
+          </mat-card-content> 
+          <!-- <mat-card-actions (click)="$event.stopPropagation()" align="start">
+            <button (click)="submitForm()" style="cursor: pointer" mat-button color="primary">SAVE </button>
+            <button style="cursor: pointer" mat-button color="primary">CANCEL</button>
+          </mat-card-actions>                              -->
+      </mat-card>
+
+    </div>

@@ -1,0 +1,122 @@
+<div mat-dialog-content id="clientDialog">
+    <mat-card class="example-card" (click)="$event.stopPropagation()">
+        <div class="card-header" style="color: white; background: #3f51b5">
+            <mat-card-title>Add New Client</mat-card-title> 
+            <button (click)="closeForm()" class="tpl-close-menu-button" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button> 
+        </div>    
+          <mat-card-content (click)="$event.stopPropagation()">
+              
+            <div >                  
+                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+                    <mat-step [stepControl]="basicInfoForm">
+                        <form [formGroup]="basicInfoForm">
+                            <!-- <ng-template matStepLabel>1</ng-template> -->
+                            <div class="parent form-flex">
+                                <mat-form-field class="form-field" >
+                                    <input formControlName="customer_name" matInput placeholder="Customer Name" class="filter">  
+                                </mat-form-field>
+                
+                                <mat-form-field class="form-field">
+                                    <input formControlName="address" type="text" matInput placeholder="Address" class="filter">
+                                </mat-form-field>
+                            </div>
+                            <div class="parent form-flex">
+                                <mat-form-field class="form-field">
+                                    <mat-select formControlName="from" placeholder="From">
+                                        <mat-option *ngFor="let opt of timeOptions" [value]="opt">
+                                          {{ opt }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="form-field">
+                                    <mat-select formControlName="to" placeholder="To">
+                                        <mat-option *ngFor="let opt of timeOptions" [value]="opt">
+                                          {{ opt }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            
+                            <div style="margin-top: 10px">
+                                <button style="float: right;" mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+
+                    <mat-step [stepControl]="billingForm">
+                        <form [formGroup]="billingForm">
+                            <!-- <ng-template matStepLabel></ng-template> -->
+                            <div class="parent form-flex">  
+                                <mat-form-field class="form-field">
+                                    <input formControlName="billing_address" matInput placeholder="Billing Address" class="filter">
+                                </mat-form-field>
+                                <mat-form-field class="form-field">
+                                    <mat-select formControlName="invoice_terms" placeholder="Invoice Terms">
+                                        <mat-option *ngFor="let opt of terms" [value]="opt">
+                                          {{ opt }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>                                                    
+                            </div>
+
+                            <div>
+                                <!-- <button mat-button matStepperPrevious>Back</button> -->
+                                <button style="float:right" mat-button matStepperNext>Next</button>
+                            </div>
+                            
+                        </form>
+                     </mat-step>
+
+                    <mat-step [stepControl]="contactForm">
+                        <form [formGroup]="contactForm">
+                          <!-- <ng-template matStepLabel>2</ng-template> -->
+                          <div class="parent form-flex">
+                                <mat-form-field class="form-field" >
+                                    <input formControlName="first_name" matInput placeholder="First Name" class="filter">      
+                                </mat-form-field>
+                    
+                                <mat-form-field class="form-field">
+                                    <input formControlName="last_name" matInput placeholder="Last Name" class="filter">
+                                </mat-form-field>
+                          </div>
+
+                          <div class="parent form-flex">
+                            <mat-form-field class="form-field" >
+                                <input formControlName="phone" matInput placeholder="Phone" class="filter">      
+                            </mat-form-field>
+                
+                            <mat-form-field class="form-field">
+                                <input formControlName="mobile" matInput placeholder="Mobile" class="filter">
+                            </mat-form-field>
+
+                          </div>
+                          
+                          <div class="parent form-flex" style="width: 50%"> 
+                            <mat-form-field class="form-field">
+                                <input formControlName="email" type="email" matInput placeholder="Email" class="filter">
+                            </mat-form-field>
+                          </div>
+
+                          <div>
+                            <!-- <button mat-button matStepperPrevious>Back</button> -->
+                            <button style="float:right" mat-raised-button color="primary" (click)="submitForm(stepper)">
+                                <mat-spinner *ngIf="isFetching"></mat-spinner>
+                                Save
+                            </button>
+                          </div>
+
+                        </form>
+                    </mat-step>
+                    </mat-horizontal-stepper>                
+            </div>
+          </mat-card-content> 
+          <!-- <mat-card-actions (click)="$event.stopPropagation()" align="start">
+            <button (click)="submitForm()" style="cursor: pointer" mat-button color="primary">SAVE </button>
+            <button style="cursor: pointer" mat-button color="primary">CANCEL</button>
+          </mat-card-actions>                              -->
+      </mat-card>
+
+    </div>

@@ -1,0 +1,48 @@
+<div mat-dialog-content id="clientDialog">
+    <mat-card class="example-card" (click)="$event.stopPropagation()">
+        <div class="card-header" style="color: white; background: #3f51b5">
+            <mat-card-title>Add New Trailer</mat-card-title> 
+            <button (click)="closeForm()" class="tpl-close-menu-button" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button> 
+        </div>    
+          <mat-card-content (click)="$event.stopPropagation()">
+              <div style="margin: 1em">
+                  <form [formGroup]="trailerForm">
+                    <!-- <ng-template matStepLabel>1</ng-template> -->
+                    <div class="parent form-flex">
+                        <mat-form-field class="form-field" >
+                            <input formControlName="unit" matInput placeholder="Unit #" class="filter">  
+                        </mat-form-field>
+            
+                        <mat-form-field class="form-field">
+                            <input formControlName="year" type="text" matInput placeholder="Year" class="filter">
+                        </mat-form-field>
+                    </div>
+                    <div class="parent form-flex">
+                        <mat-form-field class="form-field" >
+                            <input formControlName="make" matInput placeholder="Make" class="filter">  
+                        </mat-form-field>
+            
+                        <mat-form-field class="form-field">
+                            <input formControlName="model" type="text" matInput placeholder="Model" class="filter">
+                        </mat-form-field>
+                    </div>
+                    <div class="parent form-flex" style="width: 50%">
+                        <mat-form-field class="form-field">
+                            <input formControlName="vin" matInput placeholder="Vin #" class="filter">
+                        </mat-form-field>
+                    </div>
+                     
+                    <div class="parent form-flex" style="width: 20%; float:right">
+                        <button style="float:right" mat-raised-button color="primary" (click)="submitForm()">Save</button>
+                    </div>
+                    
+                </form>
+            </div>
+          </mat-card-content> 
+          <mat-card-actions (click)="$event.stopPropagation()" align="start">
+          </mat-card-actions>                             
+      </mat-card>
+
+    </div>

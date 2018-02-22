@@ -1,0 +1,156 @@
+<mat-grid-list class="grid-container" cols="5" rowHeight="60px">
+    <span>
+        <mat-grid-tile [colspan]="1" [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Personal</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info" 
+                 [ngClass]="{'mat-focused': displayInputLine.last_name}"
+                 (mouseenter)="focus('last_name')" (mouseleave)="removeFocus('last_name')">
+                <input [(ngModel)]="_data.last_name" matInput placeholder="Last Name">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.first_name}"
+            (mouseenter)="focus('first_name')" (mouseleave)="removeFocus('first_name')">
+                <input [(ngModel)]="_data.first_name" matInput placeholder="First Name">
+            </mat-form-field>
+        </mat-grid-tile>
+        
+        
+    </span>
+
+    <span>
+        <mat-grid-tile [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Contact</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.mobile_phone}"
+            (mouseenter)="focus('mobile_phone')" (mouseleave)="removeFocus('mobile_phone')">
+                <input [(ngModel)]="_data.mobile" matInput placeholder="Mobile Phone">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'white'"
+        [ngClass]="{'mat-focused': displayInputLine.land_line}"
+        (mouseenter)="focus('land_line')" (mouseleave)="removeFocus('land_line')">
+            <mat-form-field class="detail-info">
+                <input [(ngModel)]="_data.land_line" matInput placeholder="Land Line">
+            </mat-form-field>
+        </mat-grid-tile>
+        <!-- <mat-grid-tile [style.background]="'white'">
+            
+        </mat-grid-tile> -->
+        
+    </span>
+
+    <span>
+        <mat-grid-tile [colspan]="1" [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Mail</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.email}"
+            (mouseenter)="focus('email')" (mouseleave)="removeFocus('email')">
+                <input [(ngModel)]="_data.email" matInput placeholder="Email">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.dob}"
+            (mouseenter)="focus('dob')" (mouseleave)="removeFocus('dob')">
+                <input [(ngModel)]="_data.dob" (click)="picker.open()" matInput 
+                    [matDatepicker]="picker" placeholder="DOB">
+                <mat-datepicker #picker></mat-datepicker>                
+            </mat-form-field>
+        </mat-grid-tile>
+        
+    </span>
+
+    <span>
+        <mat-grid-tile [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Address</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.address}"
+            (mouseenter)="focus('address')" (mouseleave)="removeFocus('address')">
+                <input [(ngModel)]="_data.address" matInput placeholder="Address">
+            </mat-form-field>
+        </mat-grid-tile>
+        
+        
+    </span>
+
+    <span>
+        <mat-grid-tile [colspan]="1" [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Driver</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.driver_license}"
+            (mouseenter)="focus('driver_license')" (mouseleave)="removeFocus('driver_license')">
+                <input [(ngModel)]="_data.drv_license" matInput placeholder="Driver License">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'"
+        [ngClass]="{'mat-focused': displayInputLine.cdl_exp}"
+        (mouseenter)="focus('cdl_exp')" (mouseleave)="removeFocus('cdl_exp')">
+            <mat-form-field class="detail-info">
+                <input [(ngModel)]="_data.cdl_exp" (click)="cdl.open()" matInput 
+                    [matDatepicker]="cdl" placeholder="CDL Exp">
+                <mat-datepicker #cdl></mat-datepicker>
+            </mat-form-field>
+        </mat-grid-tile>
+        
+        
+    </span>
+
+
+    <span>
+        <mat-grid-tile [colspan]="1" [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Dates</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.last_drug}"
+            (mouseenter)="focus('last_drug')" (mouseleave)="removeFocus('last_drug')">
+                <input [(ngModel)]="_data.last_drug_test" matInput (click)="lastDrugTest.open()"
+                    [matDatepicker]="lastDrugTest" placeholder="Last Drug Test">
+                <mat-datepicker #lastDrugTest></mat-datepicker>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.phy_exp}"
+            (mouseenter)="focus('phy_exp')" (mouseleave)="removeFocus('phy_exp')">
+                <input [(ngModel)]="_data.physical_exp" matInput (click)="phyExp.open()"
+                    [matDatepicker]="phyExp" placeholder="Physical Exp">
+                <mat-datepicker #phyExp></mat-datepicker>
+            </mat-form-field>
+        </mat-grid-tile>
+        
+        
+    </span>
+    
+</mat-grid-list>
+<div class="comment-container">
+    <hr>
+    <span class="comment-input">
+        <mat-form-field class="example-full-width">
+            <mat-icon matPrefix>search</mat-icon>
+            <input type="text" matInput placeholder="Add Comments"> 
+        </mat-form-field>
+        <button mat-button color="primary">post</button>
+    </span>
+    <hr>
+    <div class="comment-row">
+        <span class="comment-avatar"><button mat-mini-fab disabled>RT</button></span>
+        <span style="margin-left: 3.7em; padding-top: 0.5em">
+            <div style="color: rgba(0, 0, 0, .2); font-size: 12px">@2pm</div>
+            <div style="font-size: 14px">Big Traffic on i95. I could be late with my nexy stop</div>
+        </span>
+    </div>
+    <hr>
+</div>

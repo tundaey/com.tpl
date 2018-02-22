@@ -1,0 +1,109 @@
+<mat-grid-list class="grid-container" cols="5" rowHeight="60px">
+    <span>
+        <mat-grid-tile [style.background]="'white'">
+          <mat-chip color="primary" selected="true">ID</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info" 
+                 [ngClass]="{'mat-focused': displayInputLine.unit}"
+                 (mouseenter)="focus('unit')" (mouseleave)="removeFocus('unit')">
+                <input [(ngModel)]="_data.unit" matInput placeholder="Unit #">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.vin}"
+            (mouseenter)="focus('vin')" (mouseleave)="removeFocus('vin')">
+                <input [(ngModel)]="_data.vin" matInput placeholder="Vin #">
+            </mat-form-field>
+        </mat-grid-tile>
+        
+    </span>
+
+    <span>
+        <mat-grid-tile [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Detail</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.year}"
+            (mouseenter)="focus('year')" (mouseleave)="removeFocus('year')">
+                <input [(ngModel)]="_data.year" matInput placeholder="Year">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+            <mat-form-field class="detail-info"
+              [ngClass]="{'mat-focused': displayInputLine.miles}"
+              (mouseenter)="focus('miles')" (mouseleave)="removeFocus('miles')">
+                  <input [(ngModel)]="_data.miles" matInput placeholder="Miles">
+            </mat-form-field>
+        </mat-grid-tile>
+        
+    </span>
+
+    <span>
+        <mat-grid-tile [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Truck</mat-chip>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'"
+        [ngClass]="{'mat-focused': displayInputLine.make}"
+        (mouseenter)="focus('make')" (mouseleave)="removeFocus('make')">
+            <mat-form-field class="detail-info">
+                <input [(ngModel)]="_data.make" matInput placeholder="Make">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+          <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.model}"
+            (mouseenter)="focus('model')" (mouseleave)="removeFocus('model')">
+                <input [(ngModel)]="_data.model" matInput placeholder="Model">
+          </mat-form-field>
+        </mat-grid-tile>
+        
+    </span>
+
+
+    <span>
+        <mat-grid-tile [style.background]="'white'">
+          <mat-chip color="primary" selected="true">Info</mat-chip>
+        </mat-grid-tile>
+        
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+          <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.gross}"
+            (mouseenter)="focus('gross')" (mouseleave)="removeFocus('gross')">
+                <input [(ngModel)]="_data.gross_wgt" matInput placeholder="Gross Wgt">
+          </mat-form-field>  
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [style.background]="'white'">
+          <mat-form-field class="detail-info"
+            [ngClass]="{'mat-focused': displayInputLine.fed_inspection}"
+            (mouseenter)="focus('fed_inspection')" (mouseleave)="removeFocus('fed_inspection')">
+                <input [(ngModel)]="_data.fed_inspect" (click)="picker.open()" matInput 
+                    [matDatepicker]="picker" placeholder="Fed Inspection">
+                <mat-datepicker #picker></mat-datepicker>                
+          </mat-form-field>  
+        </mat-grid-tile>
+        
+    </span>
+    
+</mat-grid-list>
+<div class="comment-container">
+    <hr>
+    <span class="comment-input">
+        <mat-form-field class="example-full-width">
+            <mat-icon matPrefix>search</mat-icon>
+            <input type="text" matInput placeholder="Add Comments"> 
+        </mat-form-field>
+        <button mat-button color="primary">post</button>
+    </span>
+    <hr>
+    <div class="comment-row">
+        <span class="comment-avatar"><button mat-mini-fab disabled>RT</button></span>
+        <span style="margin-left: 3.7em; padding-top: 0.5em">
+            <div style="color: rgba(0, 0, 0, .2); font-size: 12px">@2pm</div>
+            <div style="font-size: 14px">Big Traffic on i95. I could be late with my nexy stop</div>
+        </span>
+    </div>
+    <hr>
+</div>

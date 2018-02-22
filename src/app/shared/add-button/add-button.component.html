@@ -1,0 +1,30 @@
+<button style="position: absolute; margin-top: -2em" color="primary" mat-fab [matMenuTriggerFor]="menu">
+    <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>
+        <mat-icon>add_shopping_cart</mat-icon>
+        <span>Add Order</span>
+    </button>
+
+    <button (click)="openDriverDialog()" mat-menu-item>
+        <mat-icon>person_pin</mat-icon>
+        <span>Add Driver</span>
+    </button>
+
+    <button (click)="openClientDialog()" mat-menu-item>
+        <mat-icon>person_add</mat-icon>
+        <span>Add Client</span>
+    </button>
+
+    <button (click)="openTruckDialog()" mat-menu-item>
+        <mat-icon>directions_bus</mat-icon>
+        <span>Add Truck</span>
+    </button>
+
+    <button (click)="openTrailerDialog()" mat-menu-item>
+        <mat-icon>local_shipping</mat-icon>
+        <span>Add Trailer</span>
+    </button>
+
+</mat-menu>

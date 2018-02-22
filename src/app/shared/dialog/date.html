@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Hi</h1>
+<mat-datepicker #endDate></mat-datepicker>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+    <input mdInput tabindex="1">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button  tabindex="2">Ok</button>
+  <button mat-button (click)="onNoClick()" tabindex="-1">No Thanks</button>
+</div>

@@ -1,0 +1,172 @@
+<mat-grid-list class="grid-container" cols="5" rowHeight="60px">
+
+  <span>
+      <mat-grid-tile [colspan]="1" [style.background]="'white'">
+        <mat-chip color="primary" selected="true">Customer</mat-chip>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2" [style.background]="'white'">
+          <mat-form-field class="detail-info" 
+               [ngClass]="{'mat-focused': displayInputLine.customer_name}"
+               (mouseenter)="focus('customer_name')" (mouseleave)="removeFocus('customer_name')">
+              <input [(ngModel)]="_data.customer_name" matInput placeholder="Customer Name">
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2" [style.background]="'white'"></mat-grid-tile>
+      
+  </span>
+
+  <span>
+    <mat-grid-tile [colspan]="1" [style.background]="'white'">
+      <mat-chip color="primary" selected="true">Terms</mat-chip>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [style.background]="'white'">
+      <mat-form-field class="detail-info"
+        [ngClass]="{'mat-focused': displayInputLine.from}"
+        (mouseenter)="focus('from')" (mouseleave)="removeFocus('from')">
+          <mat-select [(value)]="timeOptions[0]"  placeholder="From">
+              <mat-option *ngFor="let opt of timeOptions" [value]="opt">
+                {{ opt }}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [style.background]="'white'">
+      <mat-form-field class="detail-info"
+        [ngClass]="{'mat-focused': displayInputLine.to}"
+        (mouseenter)="focus('to')" (mouseleave)="removeFocus('to')">
+          <mat-select [(value)]="timeOptions[3]"  placeholder="To">
+              <mat-option *ngFor="let opt of timeOptions" [value]="opt">
+                {{ opt }}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    
+</span>
+
+  <span>
+      <mat-grid-tile [colspan]="1" [style.background]="'white'">
+        <mat-chip color="primary" selected="true">Address</mat-chip>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="3" [style.background]="'white'">
+        <mat-form-field style="margin-left: 0px !important" class="detail-info"
+          [ngClass]="{'mat-focused': displayInputLine.address}"
+          (mouseenter)="focus('address')" (mouseleave)="removeFocus('address')">
+          <input [(ngModel)]="_data.address" matInput placeholder="Address">
+        </mat-form-field>
+      </mat-grid-tile>  
+      <mat-grid-tile [colspan]="1" [style.background]="'white'"></mat-grid-tile>
+  </span>
+
+  <span>
+    <mat-grid-tile [colspan]="1" [style.background]="'white'">
+      <mat-chip color="primary" selected="true">Invoice</mat-chip>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [style.background]="'white'">
+      <mat-form-field class="detail-info"
+        [ngClass]="{'mat-focused': displayInputLine.invoice_terms}"
+        (mouseenter)="focus('invoice_terms')" (mouseleave)="removeFocus('invoice_terms')">
+        <mat-select [(value)]="terms[0]" placeholder="Invoice Terms">
+            <mat-option *ngFor="let opt of terms" [value]="opt">
+              {{ opt }}
+            </mat-option>
+        </mat-select>
+      </mat-form-field> 
+    </mat-grid-tile> 
+
+    <mat-grid-tile [colspan]="2" [style.background]="'white'">
+      <mat-form-field class="detail-info"
+      [ngClass]="{'mat-focused': displayInputLine.email}"
+      (mouseenter)="focus('email')" (mouseleave)="removeFocus('email')">
+          <input [(ngModel)]="_data.email" matInput placeholder="Email">
+      </mat-form-field>
+    </mat-grid-tile>  
+  </span>
+
+  <span>
+      <mat-grid-tile [style.background]="'white'">
+        <mat-chip color="primary" selected="true">Billing</mat-chip>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2" [style.background]="'white'">
+        <mat-form-field class="detail-info"
+          [ngClass]="{'mat-focused': displayInputLine.billing_address}"
+          (mouseenter)="focus('billing_address')" (mouseleave)="removeFocus('billing_address')">
+            <input [(ngModel)]="_data.billing_address" matInput placeholder="Billing Address">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [style.background]="'white'"></mat-grid-tile>
+     
+  </span>
+
+
+  <span>
+      <mat-grid-tile [colspan]="1" [style.background]="'white'">
+        <mat-chip color="primary" selected="true">Contact</mat-chip>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2" [style.background]="'white'">
+          <mat-form-field class="detail-info"
+          [ngClass]="{'mat-focused': displayInputLine.mobile_phone}"
+          (mouseenter)="focus('mobile_phone')" (mouseleave)="removeFocus('mobile_phone')">
+              <input [(ngModel)]="_data.mobile" matInput placeholder="Mobile Phone">
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2" [style.background]="'white'"
+      [ngClass]="{'mat-focused': displayInputLine.land_line}"
+      (mouseenter)="focus('land_line')" (mouseleave)="removeFocus('land_line')">
+          <mat-form-field class="detail-info">
+              <input [(ngModel)]="_data.phone" matInput placeholder="Land Line">
+          </mat-form-field>
+      </mat-grid-tile>
+  </span>
+
+  <span>
+      <mat-grid-tile [colspan]="1" [style.background]="'white'">
+        <mat-chip color="primary" selected="true">Personal</mat-chip>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2" [style.background]="'white'">
+        <mat-form-field class="detail-info"
+          [ngClass]="{'mat-focused': displayInputLine.first_name}"
+          (mouseenter)="focus('first_name')" (mouseleave)="removeFocus('first_name')">
+              <input [(ngModel)]="_data.first_name" matInput placeholder="First Name">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2" [style.background]="'white'">
+        <mat-form-field class="detail-info"
+          [ngClass]="{'mat-focused': displayInputLine.last_name}"
+          (mouseenter)="focus('last_name')" (mouseleave)="removeFocus('last_name')">
+              <input [(ngModel)]="_data.last_name" matInput placeholder="Last Name">
+        </mat-form-field>
+      </mat-grid-tile>
+
+  </span>  
+</mat-grid-list>
+<div class="comment-container">
+  <hr>
+  <span class="comment-input">
+      <mat-form-field class="example-full-width">
+          <mat-icon matPrefix>search</mat-icon>
+          <input type="text" matInput placeholder="Add Comments"> 
+      </mat-form-field>
+      <button mat-button color="primary">post</button>
+  </span>
+  <hr>
+  <div class="comment-row">
+      <span class="comment-avatar"><button mat-mini-fab disabled>RT</button></span>
+      <span style="margin-left: 3.7em; padding-top: 0.5em">
+          <div style="color: rgba(0, 0, 0, .2); font-size: 12px">@2pm</div>
+          <div style="font-size: 14px">Big Traffic on i95. I could be late with my nexy stop</div>
+      </span>
+  </div>
+  <hr>
+</div>
